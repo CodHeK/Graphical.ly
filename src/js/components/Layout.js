@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AddEdgeAction } from '../actions/EdgeAction';
+import { AddEdgeAction, DFSOutput } from '../actions/EdgeAction';
 import css from '../../css/styles.css';
 
 @connect((store) => {
   return {
     edges: store.edges.edges,
+    dfs: store.dfs.dfs,
   };
 })
 
@@ -20,7 +21,6 @@ class Layout extends React.Component {
   newEdge(e) {
     if(e.which === 13) {
       let edgeVals = e.target.value;
-      //console.log(edgeVals.length);
 
       if(edgeVals.length == 3) {
         let u = edgeVals.split(" ")[0];
@@ -42,14 +42,11 @@ class Layout extends React.Component {
 
   dfs(v, visited, adjList) {
     console.log(v);
+    this.props.dispatch(DFSOutput(v));
     visited[v] = true;
 
     var get_neighbours
-    // for(var key of adjList.values()) {
-    //   console.log(key);
-    // }
     for(var key of adjList.keys()) {
-      //console.log(key + " " + v);
       if(key == v) {
         get_neighbours = adjList.get(key);
       }
@@ -57,7 +54,6 @@ class Layout extends React.Component {
 
     for (var i in get_neighbours) {
         var get_elem = get_neighbours[i];
-        //console.log(get_elem);
         if (!visited[get_elem]) {
             this.dfs(get_elem, visited, adjList);
         }
@@ -82,8 +78,9 @@ class Layout extends React.Component {
   }
 
   render() {
-    const { edges } = this.props;
+    const { edges, dfs } = this.props;
     const edgesMapped = edges.map(edge => <li key={edge.edge_id}>{edge.u} and {edge.v}</li>);
+    const dfs_output = dfs.map(v => <li key={v}>{v}</li>);
     return (
       <div className="mainDiv">
         <table>
@@ -97,6 +94,8 @@ class Layout extends React.Component {
         <ul className="list">{edgesMapped}</ul>
         <br />
         <button className="dfs" onClick={this.dfsStart.bind(this)}>DFS</button>
+        <br />
+        <ul className="list">{dfs_output}</ul>
       </div>
     );
   }

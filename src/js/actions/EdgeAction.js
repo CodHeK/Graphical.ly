@@ -7,3 +7,10 @@ export function AddEdgeAction(u, v) {
     payload: { id: edge_id, u: u, v: v},
   }
 }
+
+export function DFSOutput(v) {
+  return {
+    type: "NEW_VERTEX_TO_DFS_OUTPUT",
+    payload: v,
+  }
+}
