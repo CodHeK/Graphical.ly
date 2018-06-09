@@ -44,7 +44,18 @@ class Layout extends React.Component {
     console.log(v);
     visited[v] = true;
 
-    var get_neighbours = adjList.get(v);
+    var get_neighbours
+    for(var key of adjList.values()) {
+      console.log(key);
+    }
+    for(var key of adjList.keys()) {
+      console.log(key + " " + v);
+      if(key === v) {
+        get_neighbours = adjList.get(key);
+      }
+    }
+
+    //var get_neighbours = adjList.get(v);
 
     console.log(get_neighbours);
 
