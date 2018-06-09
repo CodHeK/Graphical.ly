@@ -38,16 +38,22 @@ class Layout extends React.Component {
     }
   }
 
+
+
   dfs(v, visited, adjList) {
     console.log(v);
     visited[v] = true;
 
     var get_neighbours = adjList.get(v);
 
+    console.log(get_neighbours);
+
     for (var i in get_neighbours) {
         var get_elem = get_neighbours[i];
-        if (!visited[get_elem])
+        //console.log(get_elem);
+        if (!visited[get_elem]) {
             this.dfs(get_elem, visited, adjList);
+        }
     }
   }
 
@@ -55,24 +61,11 @@ class Layout extends React.Component {
     var n = 0;
     var adjList = new Map();
     for(var i=0;i<this.props.edges.length;i++) {
-      n = Math.max(this.props.edges[i].u, this.props.edges[i].v);
+      n = Math.max(n, Math.max(this.props.edges[i].u, this.props.edges[i].v));
+      adjList.set(this.props.edges[i].u, []);
     }
-    for(var i=1;i<=n;i++) {
-      var null_array = [];
-      adjList.set(i, null_array);
-    }
-    for (var key of adjList.keys()) {
-      console.log(key);
-    }
-    //console.log(adjList.size);
     for(var i=0;i<this.props.edges.length;i++) {
-      var x = this.props.edges[i].u;
-      var y = this.props.edges[i].v;
-      console.log(x + " " + y);
-      adjList.get(x).push(y);
-    }
-    for (var key of adjList.values()) {
-      console.log(key);
+      adjList.get(this.props.edges[i].u).push(this.props.edges[i].v);
     }
     var visited = [];
     for(i=1;i<=n;i++) {
