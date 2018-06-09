@@ -45,19 +45,15 @@ class Layout extends React.Component {
     visited[v] = true;
 
     var get_neighbours
-    for(var key of adjList.values()) {
-      console.log(key);
-    }
+    // for(var key of adjList.values()) {
+    //   console.log(key);
+    // }
     for(var key of adjList.keys()) {
-      console.log(key + " " + v);
-      if(key === v) {
+      //console.log(key + " " + v);
+      if(key == v) {
         get_neighbours = adjList.get(key);
       }
     }
-
-    //var get_neighbours = adjList.get(v);
-
-    console.log(get_neighbours);
 
     for (var i in get_neighbours) {
         var get_elem = get_neighbours[i];
@@ -82,7 +78,7 @@ class Layout extends React.Component {
     for(i=1;i<=n;i++) {
       visited[i] = false;
     }
-    this.dfs(1, visited, adjList);
+    this.dfs(3, visited, adjList);
   }
 
   render() {
