@@ -14,3 +14,10 @@ export function DFSOutput(v) {
     payload: v,
   }
 }
+
+export function Refresh() {
+  return {
+    type: "REFRESH",
+    payload: [],
+  }
+}

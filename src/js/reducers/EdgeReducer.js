@@ -11,6 +11,10 @@ export default function reducer(state={
       state = {...state, dfs: [...state.dfs, action.payload]};
       break;
     }
+    case "REFRESH": {
+      state = {...state, dfs : action.payload };
+      break;
+    }
   }
   return state;
 }

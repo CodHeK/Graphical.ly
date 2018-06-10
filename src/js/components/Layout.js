@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AddEdgeAction, DFSOutput } from '../actions/EdgeAction';
+import { AddEdgeAction, DFSOutput, Refresh } from '../actions/EdgeAction';
 import css from '../../css/styles.css';
 
 @connect((store) => {
@@ -79,6 +79,7 @@ class Layout extends React.Component {
   }
 
   sendVertex(e) {
+    this.props.dispatch(Refresh());
     this.setState({ start: e.target.value });
   }
 
