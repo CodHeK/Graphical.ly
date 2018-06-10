@@ -15,6 +15,7 @@ class Layout extends React.Component {
     super();
     this.state = {
       error: "",
+      start: 1,
     }
   }
 
@@ -22,14 +23,12 @@ class Layout extends React.Component {
     if(e.which === 13) {
       let edgeVals = e.target.value;
 
-      if(edgeVals.length == 3) {
+      if(edgeVals.length >= 3) {
         let u = edgeVals.split(" ")[0];
         let v = edgeVals.split(" ")[1];
         this.props.dispatch(AddEdgeAction(u, v));
         e.target.value = "";
 
-        console.log(u);
-        console.log(v);
         this.setState({ error: "" });
       }
       else {
@@ -76,11 +75,16 @@ class Layout extends React.Component {
     for(i=1;i<=n;i++) {
       visited[i] = false;
     }
-    this.dfs(3, visited, adjList);
+    this.dfs(this.state.start, visited, adjList);
+  }
+
+  sendVertex(e) {
+    this.setState({ start: e.target.value });
   }
 
   render() {
     const { edges, dfs } = this.props;
+    console.log("dfs output" + dfs);
     const edgesMapped = edges.map(edge => <li className="edge_list" key={edge.edge_id}>( {edge.u} , {edge.v} )</li>);
     const dfs_output = dfs.map(v => <li className="vertex" key={v}>{v}</li>);
     return (
@@ -101,6 +105,7 @@ class Layout extends React.Component {
         <br />
         <ul className="list">{edgesMapped}</ul>
         <br />
+        <input className="startV" onChange={this.sendVertex.bind(this)} placeholder="Start Vertex" />
         <button className="dfs" onClick={this.dfsStart.bind(this)}>DFS</button>
         <hr  className="line" />
         <h1>Graph</h1>

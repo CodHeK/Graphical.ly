@@ -1,6 +1,6 @@
 .mainDiv {
   text-align: center;
-  padding-top: 10%;
+  padding-top: 2%;
 }
 .tab {
   width: 100%;
@@ -21,6 +21,16 @@
   border-radius: 20px;
   text-align: center;
   border: 1px solid black;
+}
+
+.startV {
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid black;
+  margin-right: 10px;
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
 }
 
 .dfs {
@@ -63,7 +73,9 @@
 
 }
 
-.vertex:nth-child(2n) {
-  margin-right: 200px;
-  margin-left: 10px;
+.vertex:nth-child(2n+1) {
+  margin-right: 250px;
+  margin-left: 100px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
