@@ -1,3 +1,3 @@
 "scripts": {
-  "start": "npm run dev"
+  "start": "run dev"
 }
