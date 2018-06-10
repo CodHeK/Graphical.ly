@@ -66,9 +66,11 @@ class Layout extends React.Component {
     for(var i=0;i<this.props.edges.length;i++) {
       n = Math.max(n, Math.max(this.props.edges[i].u, this.props.edges[i].v));
       adjList.set(this.props.edges[i].u, []);
+      adjList.set(this.props.edges[i].v, []);
     }
     for(var i=0;i<this.props.edges.length;i++) {
       adjList.get(this.props.edges[i].u).push(this.props.edges[i].v);
+      adjList.get(this.props.edges[i].v).push(this.props.edges[i].u);
     }
     var visited = [];
     for(i=1;i<=n;i++) {
@@ -79,23 +81,31 @@ class Layout extends React.Component {
 
   render() {
     const { edges, dfs } = this.props;
-    const edgesMapped = edges.map(edge => <li key={edge.edge_id}>{edge.u} and {edge.v}</li>);
-    const dfs_output = dfs.map(v => <li key={v}>{v}</li>);
+    const edgesMapped = edges.map(edge => <li className="edge_list" key={edge.edge_id}>( {edge.u} , {edge.v} )</li>);
+    const dfs_output = dfs.map(v => <li className="vertex" key={v}>{v}</li>);
     return (
       <div className="mainDiv">
-        <table>
+        <table className="tab">
           <tbody>
             <tr>
+              <td><h1>Insert Edges<br /></h1></td>
+            </tr>
+            <tr>
+              <td><h4 className="error">{this.state.error}</h4></td>
+            </tr>
+            <tr>
               <td><input className="edge" onKeyPress={this.newEdge.bind(this)} /></td>
-              <td>{this.state.error}</td>
             </tr>
           </tbody>
         </table>
+        <br />
         <ul className="list">{edgesMapped}</ul>
         <br />
         <button className="dfs" onClick={this.dfsStart.bind(this)}>DFS</button>
+        <hr  className="line" />
+        <h1>Graph</h1>
         <br />
-        <ul className="list">{dfs_output}</ul>
+        <ul className="list_dfs">{dfs_output}</ul>
       </div>
     );
   }

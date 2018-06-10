@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
+    "@psychobolt/react-paperjs": "0.0.47",
     "axios": "^0.12.0",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.0",
@@ -15,8 +16,10 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "md5": "^2.2.1",
+    "paper": "^0.11.5",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "react-paper-bindings": "^1.1.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
