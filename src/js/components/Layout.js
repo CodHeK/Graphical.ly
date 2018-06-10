@@ -75,7 +75,9 @@ class Layout extends React.Component {
     for(i=1;i<=n;i++) {
       visited[i] = false;
     }
-    this.dfs(this.state.start, visited, adjList);
+    if(this.state.start != "") {
+      this.dfs(this.state.start, visited, adjList);
+    }
   }
 
   sendVertex(e) {
