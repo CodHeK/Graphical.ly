@@ -73,9 +73,28 @@
 
 }
 
-.vertex:nth-child(2n+1) {
+.list_dfs {
+  list-style: none;
+}
+
+.dfs_list {
+  display: inline-block;
+  font-size: 25px;
+  padding-left: 100px;
+  opacity: 0;
+}
+
+.magic {
+  opacity: 1;
+}
+
+.vertex:nth-child(3n+1) {
   margin-right: 250px;
-  margin-left: 100px;
+  margin-left: 75px;
   margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.activeNode {
+  background-color: red;
 }

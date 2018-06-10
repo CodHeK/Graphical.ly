@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AddEdgeAction, DFSOutput, Refresh } from '../actions/EdgeAction';
 import css from '../../css/styles.css';
+import $ from 'jquery';
 
 @connect((store) => {
   return {
@@ -85,11 +86,32 @@ class Layout extends React.Component {
     this.setState({ start: e.target.value });
   }
 
+  componentDidUpdate() {
+    var n = this.props.dfs.length;
+    console.log(n);
+    for(var i=1;i<=n;i++) {
+      this.douche(i);
+    }
+  }
+
+  douche(i) {
+    var str = ".vertex:nth-child(" + (i) + ")";
+    var str1 = ".dfs_list:nth-child(" + (i) + ")";
+    setTimeout(function() {
+      $(str).addClass("activeNode");
+      $(str1).addClass("magic");
+      setTimeout(function() {
+        $(str).removeClass("activeNode"); 
+      }, 500);
+    }, i*1000);
+  }
+
   render() {
     const { edges, dfs } = this.props;
     console.log("dfs output" + dfs);
     const edgesMapped = edges.map(edge => <li className="edge_list" key={edge.edge_id}>( {edge.u} , {edge.v} )</li>);
     const dfs_output = dfs.map(v => <li className="vertex" key={v}>{v}</li>);
+    const DFS = dfs.map(v => <li className="dfs_list" key={v}>{v}</li>);
     return (
       <div className="mainDiv">
         <table className="tab">
@@ -111,9 +133,11 @@ class Layout extends React.Component {
         <input className="startV" onChange={this.sendVertex.bind(this)} placeholder="Start Vertex" />
         <button className="dfs" onClick={this.dfsStart.bind(this)}>DFS</button>
         <hr  className="line" />
-        <h1>Graph</h1>
+        <h1>DFS Output</h1>
         <br />
-        <ul className="list_dfs">{dfs_output}</ul>
+        <ul className="list_dfs">{DFS}</ul>
+        <br />
+        <ul id="nodes" className="list_dfs">{dfs_output}</ul>
       </div>
     );
   }
